@@ -6,8 +6,10 @@ authentik:
     password: "minimouse"
 
 server:
+  service:
+    type: LoadBalancer
   ingress:
-    enabled: true
+    enabled: false
     ingressClassName: nginx
     hosts:
       - auth.todo.local
