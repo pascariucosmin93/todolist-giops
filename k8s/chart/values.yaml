@@ -5,11 +5,11 @@ fullnameOverride: ''
 images:
   backend:
     repository: ghcr.io/pascariucosmin93/todo-backend
-    tag: 0.0.7
+    tag: 0.0.8
     pullPolicy: IfNotPresent
   frontend:
     repository: ghcr.io/pascariucosmin93/todo-frontend
-    tag: 0.0.7
+    tag: 0.0.8
     pullPolicy: IfNotPresent
   postgres:
     repository: postgres
