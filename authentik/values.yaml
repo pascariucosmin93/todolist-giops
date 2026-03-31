@@ -1,0 +1,26 @@
+authentik:
+  secret_key: "test-authentik-secret-minimouse-change-me-later"
+  error_reporting:
+    enabled: false
+  postgresql:
+    password: "minimouse"
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    hosts:
+      - auth.todo.local
+
+worker:
+  replicas: 1
+
+postgresql:
+  enabled: true
+  auth:
+    password: "minimouse"
+
+redis:
+  enabled: true
+  auth:
+    enabled: false
