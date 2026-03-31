@@ -1,16 +1,15 @@
-namespaceOverride: ""
-
-nameOverride: ""
-fullnameOverride: ""
-
+---
+namespaceOverride: ''
+nameOverride: ''
+fullnameOverride: ''
 images:
   backend:
-    repository: ghcr.io/example/todo-backend
-    tag: "0.0.1"
+    repository: ghcr.io/pascariucosmin93/todo-backend
+    tag: 0.0.2
     pullPolicy: IfNotPresent
   frontend:
-    repository: ghcr.io/example/todo-frontend
-    tag: "0.0.1"
+    repository: ghcr.io/pascariucosmin93/todo-frontend
+    tag: 0.0.2
     pullPolicy: IfNotPresent
   postgres:
     repository: postgres
@@ -20,40 +19,35 @@ images:
     repository: quay.io/keycloak/keycloak
     tag: 26.1.4
     pullPolicy: IfNotPresent
-
 imagePullSecrets: []
-
 serviceAccount:
   create: false
-  name: ""
-
+  name: ''
 backend:
   replicaCount: 1
   service:
     type: ClusterIP
     port: 8000
-  corsOrigins: "https://todo.local"
-  keycloakRealm: "todo-app"
-  keycloakFrontendClientId: "todo-frontend"
-  keycloakIssuerUrl: "https://auth.todo.local/auth/realms/todo-app"
-  keycloakJwksUrl: "http://{{ include \"todolist.keycloakFullname\" . }}:8080/auth/realms/todo-app/protocol/openid-connect/certs"
+  corsOrigins: https://todo.local
+  keycloakRealm: todo-app
+  keycloakFrontendClientId: todo-frontend
+  keycloakIssuerUrl: https://auth.todo.local/auth/realms/todo-app
+  keycloakJwksUrl: http://{{ include "todolist.keycloakFullname" . }}:8080/auth/realms/todo-app/protocol/openid-connect/certs
   resources: {}
-
 frontend:
   replicaCount: 1
   service:
     type: LoadBalancer
     port: 80
     annotations: {}
-    loadBalancerIP: ""
+    loadBalancerIP: ''
     externalTrafficPolicy: Cluster
   runtimeConfig:
-    apiUrl: "https://api.todo.local/api/v1"
-    keycloakUrl: "https://auth.todo.local/auth"
-    keycloakRealm: "todo-app"
-    keycloakClientId: "todo-frontend"
+    apiUrl: https://api.todo.local/api/v1
+    keycloakUrl: https://auth.todo.local/auth
+    keycloakRealm: todo-app
+    keycloakClientId: todo-frontend
   resources: {}
-
 postgres:
   enabled: true
   service:
@@ -61,32 +55,31 @@ postgres:
   persistence:
     enabled: true
     size: 5Gi
-    storageClass: ""
+    storageClass: ''
   auth:
-    database: ""
-    username: ""
-    password: ""
-    existingSecret: "todolist-postgres"
+    database: todolist
+    username: cosmin
+    password: minimouse
+    existingSecret: ''
     existingSecretKeys:
       database: POSTGRES_DB
       username: POSTGRES_USER
       password: POSTGRES_PASSWORD
   resources: {}
-
 keycloak:
   enabled: true
   service:
     port: 8080
   admin:
-    user: ""
-    password: ""
-    existingSecret: "todolist-keycloak-admin"
+    user: cosmin
+    password: minimouse
+    existingSecret: ''
     existingSecretKeys:
       user: KEYCLOAK_ADMIN
       password: KEYCLOAK_ADMIN_PASSWORD
-  httpRelativePath: /auth
-  hostname: "https://auth.todo.local/auth"
-  hostnameStrict: "false"
+  httpRelativePath: "/auth"
+  hostname: https://auth.todo.local/auth
+  hostnameStrict: 'false'
   realmImport:
     enabled: true
     json: |
@@ -108,7 +101,6 @@ keycloak:
         ]
       }
   resources: {}
-
 ingress:
   enabled: true
   className: nginx
@@ -118,6 +110,5 @@ ingress:
     backend: api.todo.local
     keycloak: auth.todo.local
   tls: []
-
 secrets:
-  create: false
+  create: true
