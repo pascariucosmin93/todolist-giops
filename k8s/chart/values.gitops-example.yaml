@@ -28,7 +28,7 @@ externalPostgres:
   auth:
     database: "todolist"
     username: "devops"
-    password: "devops"
+    password: "gaz"
 
 ingress:
   enabled: true

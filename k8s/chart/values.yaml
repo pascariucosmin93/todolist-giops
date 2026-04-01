@@ -47,7 +47,7 @@ externalPostgres:
   auth:
     database: todolist
     username: devops
-    password: devops
+    password: gaz
 postgres:
   enabled: false
   service:
