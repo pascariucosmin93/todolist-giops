@@ -9,6 +9,8 @@ images:
 backend:
   corsOrigins:
     - "https://todo.example.internal"
+  runtimeSecret:
+    existingSecret: "todo-todolist-runtime"
 
 frontend:
   service:
@@ -27,8 +29,13 @@ externalPostgres:
   bootstrapDatabase: "forgejo2"
   auth:
     database: "todolist"
-    username: "devops"
-    password: "gaz"
+    username: ""
+    password: ""
+
+appAuth:
+  username: ""
+  password: ""
+  sessionToken: ""
 
 ingress:
   enabled: true
